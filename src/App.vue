@@ -10,7 +10,7 @@
       <v-btn text class="nav-btn" @click="$router.push('/login')">Login</v-btn>
     </v-app-bar>
 
-    <!-- Main Content (Dynamic Pages) -->
+    <!-- Main Content -->
     <v-main>
       <router-view></router-view>
     </v-main>
@@ -28,13 +28,12 @@ import { mapGetters } from 'vuex';
 
 export default {
   computed: {
-    ...mapGetters(['cartItemCount']) // Get cart item count from Vuex
+    ...mapGetters(['cartItemCount']) 
   }
 };
 </script>
 
 <style>
-/* Add any global styles here */
 body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
@@ -46,7 +45,7 @@ body {
 }
 
 .nav-btn:hover {
-  text-decoration: underline; /* Optional hover effect */
+  text-decoration: underline; 
 }
 
 v-footer {

@@ -43,7 +43,7 @@ const store = createStore({
   },
   actions: {
     fetchProducts() {
-      // In a real-world app, you'd fetch products from an API.
+      
     },
     addToCart({ commit }, product) {
       commit('addToCart', product);
