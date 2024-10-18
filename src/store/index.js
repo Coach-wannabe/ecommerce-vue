@@ -26,38 +26,61 @@ const store = createStore({
       }
     ],
     cart: [],
-    user: null
+    user: null, // This holds the currently logged-in user's information
+    registeredUsers: [] // This will hold the registered users
   },
   mutations: {
+    setUser(state, user) {
+      state.user = user;
+    },
+    addRegisteredUser(state, user) {
+      state.registeredUsers.push(user); // Add new user to registered users list
+    },
     addToCart(state, product) {
-      const item = state.cart.find((i) => i.id === product.id);
+      const item = state.cart.find(i => i.id === product.id);
       if (item) {
         item.quantity += 1;
       } else {
         state.cart.push({ ...product, quantity: 1 });
       }
     },
-    removeFromCart(state, productId) {
-      state.cart = state.cart.filter((item) => item.id !== productId);
+    logout(state) {
+      state.user = null;
+      localStorage.removeItem('user'); // Remove user from localStorage on logout
     }
   },
   actions: {
-    fetchProducts() {
-      
+    login({ commit, state }, credentials) {
+      // Find if the user exists in registeredUsers
+      const user = state.registeredUsers.find(
+        user => user.username === credentials.username && user.password === credentials.password
+      );
+      if (user) {
+        commit('setUser', { username: user.username });
+        localStorage.setItem('user', JSON.stringify({ username: user.username }));
+        return true;
+      }
+      return false; // Invalid credentials
     },
-    addToCart({ commit }, product) {
-      commit('addToCart', product);
+    register({ commit, state }, credentials) {
+      // Check if the username already exists
+      const existingUser = state.registeredUsers.find(user => user.username === credentials.username);
+      if (existingUser) {
+        return { success: false, message: 'Username already exists' }; // Username already taken
+      }
+      // Add user to registered users
+      commit('addRegisteredUser', credentials);
+      commit('setUser', { username: credentials.username }); // Log in the user after registration
+      localStorage.setItem('user', JSON.stringify({ username: credentials.username }));
+      return { success: true };
     },
-    removeFromCart({ commit }, productId) {
-      commit('removeFromCart', productId);
+    logout({ commit }) {
+      commit('logout');
     }
   },
   getters: {
-    cartItemCount(state) {
-      return state.cart.reduce((total, item) => total + item.quantity, 0);
-    },
-    cartTotal(state) {
-      return state.cart.reduce((total, item) => total + item.price * item.quantity, 0);
+    isAuthenticated(state) {
+      return !!state.user; // Return true if user is logged in
     }
   }
 });
