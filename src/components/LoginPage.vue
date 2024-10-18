@@ -44,13 +44,13 @@ export default {
         username: this.username,
         password: this.password
       };
-      // Dispatch Vuex action to login
+      
       const success = this.$store.dispatch('login', credentials);
       if (success) {
-        const redirect = this.$route.query.redirect || '/products'; // Redirect after login
+        const redirect = this.$route.query.redirect || '/products'; 
         this.$router.push(redirect);
       } else {
-        this.errorMessage = 'Invalid username or password'; // Show error message on failure
+        this.errorMessage = 'Invalid username or password'; 
       }
     }
   }

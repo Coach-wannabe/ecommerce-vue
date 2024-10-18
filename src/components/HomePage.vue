@@ -19,17 +19,17 @@ import { mapState } from 'vuex';
 
 export default {
   computed: {
-    ...mapState(['products']) // Fetch the products from the Vuex store
+    ...mapState(['products']) 
   },
+  
   methods: {
     getImage(imageName) {
-      // Dynamically load the image using require
       return require(`@/assets/images/${imageName}`);
     },
+
     addToCart(product) {
       const success = this.$store.dispatch('addToCart', product);
       if (!success) {
-        // Redirect to login if user is not logged in
         this.$router.push('/login');
       }
     }

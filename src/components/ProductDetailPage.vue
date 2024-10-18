@@ -17,21 +17,25 @@ export default {
       product: null
     };
   },
+
   computed: {
     ...mapState(['products'])
   },
+  
   created() {
     const productId = this.$route.params.id;
     this.product = this.products.find(p => p.id === parseInt(productId));
   },
+  
   methods: {
     getImage(imageName) {
       return require(`@/assets/images/${imageName}`);
     },
+    
     addToCart(product) {
       const success = this.$store.dispatch('addToCart', product);
       if (!success) {
-        // Redirect to login page if the user is not logged in
+        
         this.$router.push('/login');
       }
     }

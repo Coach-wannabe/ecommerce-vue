@@ -26,16 +26,19 @@ const store = createStore({
       }
     ],
     cart: [],
-    user: null, // This holds the currently logged-in user's information
-    registeredUsers: [] // This will hold the registered users
+    user: null, 
+    registeredUsers: [] 
   },
+
   mutations: {
     setUser(state, user) {
       state.user = user;
     },
+
     addRegisteredUser(state, user) {
-      state.registeredUsers.push(user); // Add new user to registered users list
+      state.registeredUsers.push(user); 
     },
+    
     addToCart(state, product) {
       const item = state.cart.find(i => i.id === product.id);
       if (item) {
@@ -44,14 +47,15 @@ const store = createStore({
         state.cart.push({ ...product, quantity: 1 });
       }
     },
+    
     logout(state) {
       state.user = null;
-      localStorage.removeItem('user'); // Remove user from localStorage on logout
+      localStorage.removeItem('user'); 
     }
   },
+
   actions: {
     login({ commit, state }, credentials) {
-      // Find if the user exists in registeredUsers
       const user = state.registeredUsers.find(
         user => user.username === credentials.username && user.password === credentials.password
       );
@@ -60,27 +64,29 @@ const store = createStore({
         localStorage.setItem('user', JSON.stringify({ username: user.username }));
         return true;
       }
-      return false; // Invalid credentials
+      return false; 
     },
+
     register({ commit, state }, credentials) {
-      // Check if the username already exists
       const existingUser = state.registeredUsers.find(user => user.username === credentials.username);
       if (existingUser) {
-        return { success: false, message: 'Username already exists' }; // Username already taken
+        return { success: false, message: 'Username already exists' }; 
       }
-      // Add user to registered users
+      
       commit('addRegisteredUser', credentials);
-      commit('setUser', { username: credentials.username }); // Log in the user after registration
+      commit('setUser', { username: credentials.username }); 
       localStorage.setItem('user', JSON.stringify({ username: credentials.username }));
       return { success: true };
     },
+
     logout({ commit }) {
       commit('logout');
     }
   },
+  
   getters: {
     isAuthenticated(state) {
-      return !!state.user; // Return true if user is logged in
+      return !!state.user; 
     }
   }
 });
