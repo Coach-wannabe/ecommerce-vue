@@ -4,7 +4,6 @@
     <v-row>
       <v-col cols="12" v-for="item in cart" :key="item.id">
         <v-card class="cart-item">
-          <!-- Dynamically load image using require() -->
           <v-img :src="getImage(item.image)" height="100px" class="cart-item-image"></v-img>
           <v-card-text>
             <h3 class="product-name">{{ item.name }}</h3>
@@ -40,7 +39,6 @@ export default {
       this.$store.dispatch('removeFromCart', productId);
     },
     getImage(imageName) {
-      // Use require to dynamically load images from the assets folder
       return require(`@/assets/images/${imageName}`);
     }
   }

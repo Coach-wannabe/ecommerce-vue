@@ -6,7 +6,6 @@
     <v-row>
       <v-col v-for="product in products" :key="product.id" cols="12" sm="6" md="4">
         <v-card class="product-card" @click="$router.push(`/product/${product.id}`)">
-          <!-- Dynamically load image using require() -->
           <v-img :src="getImage(product.image)" height="200px" class="product-image"></v-img>
           <v-card-title class="product-name">{{ product.name }}</v-card-title>
           <v-card-subtitle class="product-price">{{ product.price }} USD</v-card-subtitle>
@@ -25,7 +24,6 @@ export default {
   },
   methods: {
     getImage(imageName) {
-      // Use require to dynamically load images from the assets folder
       return require(`@/assets/images/${imageName}`);
     }
   }

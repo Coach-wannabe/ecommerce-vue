@@ -2,7 +2,6 @@
   <v-container class="product-detail-page">
     <v-row>
       <v-col cols="12" md="6">
-        <!-- Dynamically load image using require() -->
         <v-img :src="getImage(product.image)" height="400px" class="product-detail-image"></v-img>
       </v-col>
       <v-col cols="12" md="6">
@@ -38,7 +37,6 @@ export default {
       this.$store.dispatch('addToCart', product);
     },
     getImage(imageName) {
-      // Use require to dynamically load images from the assets folder
       return require(`@/assets/images/${imageName}`);
     }
   }
