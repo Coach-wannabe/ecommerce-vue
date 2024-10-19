@@ -2,7 +2,6 @@
   <v-app>
     <!-- Navigation -->
     <v-app-bar app color="primary" dark>
-      <v-toolbar-title>E-Commerce</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn text class="nav-btn" @click="$router.push('/')">Home</v-btn>
       <v-btn text class="nav-btn" @click="$router.push('/products')">Products</v-btn>
