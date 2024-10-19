@@ -25,18 +25,18 @@ const store = createStore({
       }
     ],
     cart: [],
-    registeredUsers: [], // Store registered users
-    user: JSON.parse(localStorage.getItem('user')) || null, // Store current logged-in user
+    registeredUsers: [], 
+    user: JSON.parse(localStorage.getItem('user')) || null, 
   },
 
   mutations: {
     setUser(state, user) {
       state.user = user;
-      localStorage.setItem('user', JSON.stringify(user)); // Store user in localStorage
+      localStorage.setItem('user', JSON.stringify(user)); 
     },
 
     addUser(state, user) {
-      state.registeredUsers.push(user); // Add new user to registered users array
+      state.registeredUsers.push(user); 
     },
 
     setProducts(state, products) {
@@ -61,39 +61,34 @@ const store = createStore({
     
     logout(state) {
       state.user = null;
-      localStorage.removeItem('user'); // Remove user from localStorage on logout
+      localStorage.removeItem('user'); 
     }
   },
 
   actions: {
     login({ commit, state }, { email, password }) {
-      // Find the user by email and password
       const user = state.registeredUsers.find(user => user.email === email && user.password === password);
       if (user) {
-        commit('setUser', { id: user.id, email: user.email, firstName: user.firstName }); // Store user
+        commit('setUser', { id: user.id, email: user.email, firstName: user.firstName }); 
         return true;
       }
-      return false; // Login failed
+      return false; 
     },
 
-    // Registration logic
     register({ commit, state }, { firstName, lastName, email, password }) {
-      // Check if email already exists
       const existingUser = state.registeredUsers.find(user => user.email === email);
       if (existingUser) {
         return { success: false, message: 'Email already exists' };
       }
 
-      // Create new user object
       const newUser = {
-        id: state.registeredUsers.length + 1, // Unique ID for the user
+        id: state.registeredUsers.length + 1, 
         firstName,
         lastName,
         email,
         password
       };
 
-      // Add user to state and log them in
       commit('addUser', newUser);
       commit('setUser', { id: newUser.id, email: newUser.email, firstName: newUser.firstName });
 
@@ -101,9 +96,8 @@ const store = createStore({
     },
     
     fetchProducts({ commit }) {
-        // Пример API запроса для продуктов
-        const products = [{ id: 1, name: 'Laptop' }, { id: 2, name: 'Phone' }];
-        commit('setProducts', products);
+      const products = [{ id: 1, name: 'Laptop' }, { id: 2, name: 'Phone' }];
+      commit('setProducts', products);
     },
     addToCart({ commit }, product){
       commit('addToCart', product);
@@ -118,10 +112,10 @@ const store = createStore({
   
   getters: {
     isAuthenticated(state) {
-      return !!state.user; // Check if a user is logged in
+      return !!state.user; 
     },
     currentUser(state) {
-      return state.user; // Return current logged-in user
+      return state.user; 
     }
   }
 });

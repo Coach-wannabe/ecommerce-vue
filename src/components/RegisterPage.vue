@@ -44,9 +44,9 @@ export default {
       });
 
       if (result.success) {
-        this.$router.push('/products'); // Redirect on success
+        this.$router.push('/products'); 
       } else {
-        this.errorMessage = result.message; // Show error if email already exists
+        this.errorMessage = result.message; 
       }
     }
   }

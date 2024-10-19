@@ -46,9 +46,9 @@ export default {
       });
 
       if (success) {
-        this.$router.push('/products'); // Redirect on success
+        this.$router.push('/products'); 
       } else {
-        this.errorMessage = 'Invalid email or password'; // Display error
+        this.errorMessage = 'Invalid email or password'; 
       }
     }
   }
