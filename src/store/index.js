@@ -93,6 +93,9 @@ const store = createStore({
     },
     logout({ commit }) {
       commit('logout');
+    },
+    removeFromCart({ commit }, productId) {
+      commit('removeFromCart', productId);
     }
   },
   

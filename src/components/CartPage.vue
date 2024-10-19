@@ -12,7 +12,7 @@
           <v-card-text>
             <h3 class="product-name">{{ item.name }}</h3>
             <p class="product-price">{{ item.price }} Tg ({{ item.quantity }})</p>
-            <v-btn text color="red" @click="removeFromCart(item.id)">Remove</v-btn>
+            <v-btn color="red" @click="removeFromCart(item.id)">Remove</v-btn>
           </v-card-text>
         </v-card>
       </v-col>
