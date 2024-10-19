@@ -94,6 +94,10 @@ const store = createStore({
 
       return { success: true };
     },
+
+    logout({ commit }) {
+      commit('logout');
+    },  
     
     fetchProducts({ commit }) {
       const products = [{ id: 1, name: 'Laptop' }, { id: 2, name: 'Phone' }];
@@ -101,9 +105,6 @@ const store = createStore({
     },
     addToCart({ commit }, product){
       commit('addToCart', product);
-    },
-    logout({ commit }) {
-      commit('logout');
     },
     removeFromCart({ commit }, productId) {
       commit('removeFromCart', productId);

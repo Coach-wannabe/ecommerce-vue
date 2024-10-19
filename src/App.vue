@@ -6,7 +6,12 @@
       <v-btn text class="nav-btn" @click="$router.push('/')">Home</v-btn>
       <v-btn text class="nav-btn" @click="$router.push('/products')">Products</v-btn>
       <v-btn text class="nav-btn" @click="$router.push('/cart')">Cart</v-btn>
-      <v-btn text class="nav-btn" @click="$router.push('/login')">Login</v-btn>
+
+      <!-- Conditionally show Login button if the user is not logged in -->
+      <v-btn class="nav-btn" v-if="!isAuthenticated" color="primary" @click="$router.push('/login')">Login</v-btn>
+
+      <!-- Conditionally show Logout button if the user is logged in -->
+      <v-btn class="nav-btn" v-if="isAuthenticated" color="secondary" @click="logout">Logout</v-btn>
     </v-app-bar>
 
     <!-- Main Content -->
@@ -27,8 +32,16 @@ import { mapGetters } from 'vuex';
 
 export default {
   computed: {
-    ...mapGetters(['cartItemCount']) 
-  }
+    ...mapGetters(['cartItemCount']),
+    ...mapGetters(['isAuthenticated']),
+  },
+  
+  methods: {
+    logout() {
+      this.$store.dispatch('logout'); // Dispatch the logout action in Vuex
+      this.$router.push('/login'); // Redirect to login page after logout
+    },
+  },
 };
 </script>
 
