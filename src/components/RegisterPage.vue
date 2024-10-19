@@ -45,7 +45,6 @@ export default {
     };
   },
   computed: {
-    // This will be true only if both passwords match
     formValid() {
       return this.password === this.confirmPassword && this.password.length > 0;
     },
@@ -65,9 +64,9 @@ export default {
       });
 
       if (result.success) {
-        this.$router.push('/products'); // Redirect on success
+        this.$router.push('/products'); 
       } else {
-        this.errorMessage = result.message; // Show error if email already exists
+        this.errorMessage = result.message;
       }
     },
   },
