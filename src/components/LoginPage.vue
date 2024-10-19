@@ -57,47 +57,86 @@ export default {
 
 <style scoped>
 .login-container {
-  max-width: 400px;
-  margin: 100px auto;
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
   background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: #333;
 }
 
 .login-form {
   display: flex;
   flex-direction: column;
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
 }
 
-label {
-  margin-bottom: 5px;
-  font-weight: bold;
+.login-form label {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #555;
 }
 
-input {
-  padding: 10px;
-  margin-bottom: 20px;
+.login-form input {
+  padding: 12px;
+  font-size: 16px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.login-form input:focus {
+  outline: none;
+  border-color: #6200ea;
 }
 
 button {
-  padding: 10px;
-  background-color: #4caf50;
+  background-color: #6200ea;
   color: white;
+  padding: 12px;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
+  font-size: 16px;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: #3700b3;
 }
 
 .error-message {
   color: red;
   font-size: 14px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.login-form p {
+  font-size: 14px;
+  color: #555;
+  margin-top: 20px;
+}
+
+.login-form a {
+  color: #6200ea;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login-form a:hover {
+  text-decoration: underline;
 }
 </style>
