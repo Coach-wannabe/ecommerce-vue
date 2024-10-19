@@ -97,24 +97,6 @@ methods: {
   margin-top: 20px;
 }
 
-.v-pagination .v-pagination__navigation {
-  background-color: #6200ea;
-  color: white;
-}
-
-.v-pagination .v-pagination__item--is-active {
-  background-color: #3700b3;
-}
-
-.v-pagination .v-pagination__navigation {
-background-color: #6200ea;
-color: white;
-}
-
-.v-pagination .v-pagination__item--is-active {
-background-color: #3700b3;
-}
-
 .product-list-page {
 display: flex;
 flex-direction: column;
@@ -196,5 +178,25 @@ background-color: #3700b3;
   .product-grid {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* 2 карточки на маленьких экранах */
   }
+}
+.pagination-buttons button {
+  background-color: #361c59;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 5px;
+  border-radius: 30px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-buttons button:disabled {
+  background-color: #5c4b83;
+  cursor: not-allowed;
+}
+
+.pagination-buttons button:not(:disabled):hover {
+  background-color: #3700b3;
 }
 </style>
