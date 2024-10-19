@@ -16,14 +16,11 @@
     <button @click="addToCart(product)">Add to Cart</button>
   </div>
 </div>
-    <v-pagination
-    v-model="currentPage"
-    :length="totalPages"
-    :total-visible="5"
-    prev-icon="mdi-chevron-left"
-    next-icon="mdi-chevron-right"
-    circle
-  ></v-pagination>
+    <div class="pagination-buttons">
+      <button @click="prevPage" :disabled="currentPage === 1">Предыдущее</button>
+      <button @click="nextPage" :disabled="currentPage === totalPages">Далее</button>
+    </div>
+
 </div>
 </template>
 
@@ -60,7 +57,9 @@ export default {
     const start = (this.currentPage - 1) * this.itemsPerPage;
     const end = start + this.itemsPerPage;
     return this.filteredProducts.slice(start, end);
-  }
+  },
+
+
 },
 
 methods: {
@@ -70,7 +69,18 @@ methods: {
 
   addToCart(product) {
     this.$store.dispatch('addToCart', product);
+  },
+  prevPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+  },
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+    }
   }
+
 }
 };
 </script>
