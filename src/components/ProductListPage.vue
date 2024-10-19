@@ -2,7 +2,7 @@
     <div class="product-list-page">
       <h1>Our Products</h1>
       <div v-for="product in products" :key="product.id" class="product-card">
-        <router-link :to="{ name: 'ProductDetail', params: { id: product.id } }">{{ product.name }}</router-link>
+   <router-link :to="{ name: 'ProductDetail', params: { id: product.id } }">More</router-link>
         <img :src="getImage(product.image)" class="product-image" />
         <h2>{{ product.name }}</h2>
         <p>{{ product.price }} Tg</p>
