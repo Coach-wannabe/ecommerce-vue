@@ -46,10 +46,85 @@ export default {
 </script>
 
 <style>
-body {
-  font-family: 'Roboto', sans-serif;
-  margin: 0;
+/* Стили для навигационной панели */
+v-app-bar {
+  display: flex;
+  justify-content: center; /* Центрирование контента */
+  align-items: center;
+  background-color: #007bff; /* Синий фон */
+  height: 70px; /* Высота панели */
+  padding: 0 20px;
 }
+
+/* Стили для кнопок навигации */
+.nav-btn {
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
+  margin: 0 15px; /* Расстояние между кнопками */
+  transition: background-color 0.3s ease;
+}
+
+.nav-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Легкий эффект при наведении */
+  border-radius: 5px; /* Скругленные углы */
+}
+
+/* Стили для логотипа или заголовка, если нужен */
+v-app-bar-title {
+  margin-right: auto; /* Перемещение заголовка или логотипа влево */
+  font-size: 24px;
+  color: white;
+}
+.nav-btn {
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-left: 10px;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.nav-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Эффект наведения */
+}
+
+/* Основной контент, чтобы не прилипать к футеру */
+v-main {
+  padding: 20px;
+  min-height: calc(100vh - 64px - 56px); /* Расчет высоты, чтобы футер был внизу */
+}
+
+/* Стили для футера */
+v-footer {
+  color: #333; /* Белый текст */
+  text-align: center; /* Центрирование текста */
+  padding: 20px 0; /* Внутренние отступы для футера */
+  position: fixed; /* Закрепление футера внизу */
+  width: 100%; /* Растяжение футера на всю ширину */
+  bottom: 0; /* Размещение внизу страницы */
+}
+
+/* Стили для текста внутри футера */
+v-footer v-col {
+  font-size: 14px; /* Размер текста */
+  color: #333;
+}
+
+.text-center {
+  font-size: 14px;
+}
+
+/* Медиа-запросы для мобильных устройств */
+@media (max-width: 600px) {
+  .nav-btn {
+    font-size: 12px; /* Уменьшение шрифта на маленьких экранах */
+  }
+
+  v-footer {
+    font-size: 12px; /* Меньший текст для футера */
+  }
+}
+</style>
 
 .nav-btn {
   margin-left: 15px;
