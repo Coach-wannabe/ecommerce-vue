@@ -28,10 +28,11 @@ export default {
     },
 
     addToCart(product) {
-      const success = this.$store.dispatch('addToCart', product);
-      if (!success) {
-        this.$router.push('/login');
-      }
+      // const success = this.$store.dispatch('addToCart', product);
+      // if (!success) {
+      //   this.$router.push('/login');
+      // }
+      this.$store.dispatch('addToCart', product);
     }
   }
 };

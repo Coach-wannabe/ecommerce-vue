@@ -34,11 +34,12 @@
       },
       
       addToCart(product) {
-        const success = this.$store.dispatch('addToCart', product);
-        if (!success) {
+        // const success = this.$store.dispatch('addToCart', product);
+        // if (!success) {
           
-          this.$router.push('/login');
-        }
+        //   this.$router.push('/login');
+        // }
+        this.$store.dispatch('addToCart', product);
       }
     }
   };
