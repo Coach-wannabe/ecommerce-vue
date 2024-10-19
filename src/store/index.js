@@ -7,6 +7,7 @@ const store = createStore({
         name: 'Laptop',
         price: 359.999,
         description: 'A great product',
+        category:'Laptops',
         image: 'laptop.png'
       },
       {
@@ -14,6 +15,7 @@ const store = createStore({
         name: 'Phone',
         price: 275.999,
         description: 'Another great product',
+        category:'Smartphones',
         image: 'phone.jpg'
       },
       {
@@ -21,6 +23,7 @@ const store = createStore({
         name: 'Fridge',
         price: 296.20,
         description: 'The best product',
+        category:'Accessories',
         image: 'fridge.jpg'
       },
       {
@@ -28,6 +31,7 @@ const store = createStore({
         name: 'Headphones',
         price: 48.90,
         description: 'Super best product',
+        category: 'Accessories',
         image: 'naushniki-sony.png'
       },
       {
@@ -35,6 +39,7 @@ const store = createStore({
         name: 'Air conditioner',
         price: 1.999,
         description: 'Mega super best product',
+        category: 'Accessories',
         image: 'cond.jpg'
       },
       {
@@ -42,6 +47,7 @@ const store = createStore({
         name: 'Tablet',
         price: 1.999,
         description: 'Ultra mega super best product',
+        category: 'Smartphones',
         image: 'ipad.jpg'
       },
       {
@@ -49,6 +55,7 @@ const store = createStore({
         name: 'Iron',
         price: 200.999,
         description: 'Hyper ultra mega super best product',
+        category: 'Accessories',
         image: 'utug.png'
       },
       {
@@ -56,6 +63,7 @@ const store = createStore({
         name: 'Washing machine',
         price: 1000.999,
         description: 'Mega hyper ultra mega super best product',
+        category: 'Accessories',
         image: 'stmach.png'
       },
       {
@@ -63,6 +71,7 @@ const store = createStore({
         name: 'TV',
         price: 2960.00,
         description: 'Extra multi hyper ultra mega super best product',
+        category: 'Accessories',
         image: 'tv.png'
       },
       {
@@ -70,6 +79,7 @@ const store = createStore({
         name: 'Vacuum cleaner',
         price: 62.00,
         description: 'Uber extra multi hyper ultra mega super best product',
+        category: 'Accessories',
         image: 'pul.jpg'
       },
       {
@@ -77,6 +87,7 @@ const store = createStore({
         name: 'Heater',
         price: 24.00,
         description: 'Meta uber extra multi hyper ultra mega super best product',
+        category: 'Accessories',
         image: '81948066.jpg'
       },
       {
@@ -84,6 +95,7 @@ const store = createStore({
         name: 'Camera',
         price: 119.00,
         description: 'Meta uber extra multi hyper ultra mega super best product',
+        category: 'Accessories',
         image: 'camera.jpg'
       },
       {

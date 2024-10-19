@@ -1,6 +1,7 @@
 <template>
   <div class="product-list-page">
     <h1>Our Products</h1>
+<<<<<<< HEAD
     <v-select
     v-model="selectedCategory"
     :items="categories"
@@ -8,6 +9,14 @@
     @change="filterProducts"
   ></v-select>
   
+=======
+
+
+    <SideBarMenu :is-visible="true"
+                 :available-category="categories"
+                  @filter-category="filterByCategory"></SideBarMenu>
+
+>>>>>>> 4c74393458a1ad7e2f86c247188cfcf9ad39ae41
   <div class="product-grid">
   <div v-for="product in paginatedProducts" :key="product.id" class="product-card">
     <router-link :to="{ name: 'ProductDetail', params: { id: product.id } }">More</router-link>
@@ -27,14 +36,17 @@
 
 <script>
 import { mapState } from 'vuex';
+import SideBarMenu from "@/components/SideBarMenu.vue";
 
 export default {
+  components: {SideBarMenu},
   data() {
     return {
       selectedCategory: 'All',
       currentPage: 1,
       itemsPerPage: 6,
       categories: ['All', 'Laptops', 'Smartphones', 'Accessories'],
+      isMenuVisible: true
     };
   },
 
@@ -78,6 +90,10 @@ methods: {
     if (this.currentPage < this.totalPages) {
       this.currentPage++;
     }
+  },
+  filterByCategory(category) {
+    this.selectedCategory = category;
+    this.currentPage = 1;
   }
 
 }
@@ -197,5 +213,22 @@ background-color: #3700b3;
 
 .pagination-buttons button:not(:disabled):hover {
   background-color: #3700b3;
+}
+.menu-toggle {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 10px 20px;
+  background-color: #6200ea;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.menu-toggle:hover {
+  background-color: #6200ea;
 }
 </style>
