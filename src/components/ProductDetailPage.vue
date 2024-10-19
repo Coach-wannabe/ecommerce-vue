@@ -32,7 +32,6 @@
       getImage(imageName) {
         return require(`@/assets/images/${imageName}`);
       },
-      
       addToCart(product) {
         // const success = this.$store.dispatch('addToCart', product);
         // if (!success) {
