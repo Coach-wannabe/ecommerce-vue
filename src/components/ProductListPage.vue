@@ -1,6 +1,12 @@
 <template>
     <div class="product-list-page">
       <h1>Our Products</h1>
+      <v-select
+      v-model="selectedCategory"
+      :items="categories"
+      label="Filter by category"
+      @change="filterProducts"
+    ></v-select>
       <div v-for="product in products" :key="product.id" class="product-card">
         <router-link :to="{ name: 'ProductDetail', params: { id: product.id } }">{{ product.name }}</router-link>
         <img :src="getImage(product.image)" class="product-image" />
@@ -8,38 +14,61 @@
         <p>{{ product.price }} Tg</p>
         <button @click="addToCart(product)">Add to Cart</button>
       </div>
-    </div>
-  </template>
+      <v-pagination
+      v-model="currentPage"
+      :length="totalPages"
+      circle
+    ></v-pagination>
+  </div>
+</template>
   
   <script>
   import { mapState } from 'vuex';
   
   export default {
+    data() {
+      return {
+        selectedCategory: 'All',
+        currentPage: 1,
+        itemsPerPage: 6,
+        categories: ['All', 'Laptops', 'Smartphones', 'Accessories'],
+      };
+    },
+
     computed: {
       ...mapState({
       products: state => state.products, // пример использования mapState
     }),
-      products() {
-      return this.$store.state.products;
-    },
-    },
-  
-    methods: {
-      getImage(imageName) {
-        return require(`@/assets/images/${imageName}`);
-      },
-      
-      addToCart(product) {
-        // const success = this.$store.dispatch('addToCart', product);
-        // if (!success) {
-          
-        //   this.$router.push('/login');
-        // }
-        this.$store.dispatch('addToCart', product);
+    
+    filteredProducts() {
+      if (this.selectedCategory === 'All') {
+        return this.products;
       }
+      return this.products.filter(product => product.category === this.selectedCategory);
+    },
+    
+    totalPages() {
+      return Math.ceil(this.filteredProducts.length / this.itemsPerPage);
+    },
+    
+    paginatedProducts() {
+      const start = (this.currentPage - 1) * this.itemsPerPage;
+      const end = start + this.itemsPerPage;
+      return this.filteredProducts.slice(start, end);
     }
-  };
-  </script>
+},
+
+  methods: {
+    getImage(imageName) {
+      return require(`@/assets/images/${imageName}`);
+    },
+
+    addToCart(product) {
+      this.$store.dispatch('addToCart', product);
+    }
+  }
+};
+</script>
 
 <style scoped>
 .product-list-page {

@@ -124,8 +124,7 @@ v-footer v-col {
     font-size: 12px; /* Меньший текст для футера */
   }
 }
-</style>
-
+<style>
 .nav-btn {
   margin-left: 15px;
   cursor: pointer;
