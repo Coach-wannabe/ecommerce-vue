@@ -10,7 +10,7 @@
   <div class="product-grid">
   <div v-for="product in paginatedProducts" :key="product.id" class="product-card">
     <router-link :to="{ name: 'ProductDetail', params: { id: product.id } }">More</router-link>
-    <img :src="getImage(product.image)" class="product-image" />
+    <img :src="getImage(product.image)" class="product-image" alt="Product Image" />
     <h2>{{ product.name }}</h2>
     <p>{{ product.price }} Tg</p>
     <button @click="addToCart(product)">Add to Cart</button>
@@ -103,7 +103,7 @@ color: white;
 
 .v-pagination .v-pagination__item--is-active {
 background-color: #3700b3;
-};
+}
 
 .product-list-page {
 display: flex;

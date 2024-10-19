@@ -1,146 +1,135 @@
 <template>
-  <v-container class="checkout-page">
+  <div class="checkout-page">
     <h1>Checkout</h1>
-    <v-form>
-      <!-- Shipping Information -->
-      <v-row>
-        <v-col cols="12" sm="6">
-          <v-text-field label="First Name" required></v-text-field>
-        </v-col>
-        <v-col cols="12" sm="6">
-          <v-text-field label="Last Name" required></v-text-field>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12">
-          <v-text-field label="Email Address" type="email" required></v-text-field>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12">
-          <v-text-field label="Shipping Address" required></v-text-field>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12" sm="6">
-          <v-text-field label="City" required></v-text-field>
-        </v-col>
-        <v-col cols="12" sm="6">
-          <v-text-field label="Postal Code" required></v-text-field>
-        </v-col>
-      </v-row>
+    <form>
+      <div>
+        <label>First Name</label>
+        <input type="text" v-model="firstName" required>
+      </div>
+      <div>
+        <label>Last Name</label>
+        <input type="text" v-model="lastName" required>
+      </div>
+      <div>
+        <label>Email Address</label>
+        <input type="email" v-model="email" required>
+      </div>
+      <div>
+        <label>Shipping Address</label>
+        <input type="text" v-model="shippingAddress" required>
+      </div>
+      <div>
+        <label>City</label>
+        <input type="text" v-model="city" required>
+      </div>
+      <div>
+        <label>Postal Code</label>
+        <input type="text" v-model="postalCode" required>
+      </div>
 
-      <!-- Payment Information -->
-      <v-divider class="my-4"></v-divider>
+      <hr>
       <h2>Payment Information</h2>
-      <v-row>
-        <v-col cols="12" sm="6">
-          <v-text-field label="Card Number" type="number" required></v-text-field>
-        </v-col>
-        <v-col cols="6" sm="3">
-          <v-text-field label="Expiry (MM/YY)" required></v-text-field>
-        </v-col>
-        <v-col cols="6" sm="3">
-          <v-text-field label="CVC" type="number" required></v-text-field>
-        </v-col>
-      </v-row>
+      <div>
+        <label>Card Number</label>
+        <input type="number" v-model="cardNumber" required>
+      </div>
+      <div>
+        <label>Expiry (MM/YY)</label>
+        <input type="text" v-model="expiryDate" required>
+      </div>
+      <div>
+        <label>CVC</label>
+        <input type="number" v-model="cvc" required>
+      </div>
 
-      <!-- Order Summary -->
-      <v-divider class="my-4"></v-divider>
+      <hr>
       <h2>Order Summary</h2>
-      <v-row>
-        <v-col cols="12">
-          <p>Total Items: 3</p>
-          <p>Total Price: $299.99</p>
-        </v-col>
-      </v-row>
+      <div>
+        <p>Total Items: {{ totalItems }}</p>
+        <p>Total Price: {{ cartTotal }} Tg</p>
+      </div>
 
-      <!-- Submit Button -->
-      <v-row>
-        <v-col cols="12" class="text-right">
-          <v-btn color="primary" @click="submitOrder">Place Order</v-btn>
-        </v-col>
-      </v-row>
-    </v-form>
-  </v-container>
+      <div>
+        <button type="button" @click="submitOrder">Place Order</button>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script>
+import { ref, computed } from 'vue';
+import { useStore } from 'vuex';
+
 export default {
-  name: "CheckoutPage",
-  methods: {
-    submitOrder() {
-      alert("Your order has been placed!");
-    }
-  }
+  setup() {
+    const store = useStore();
+
+    const firstName = ref('');
+    const lastName = ref('');
+    const email = ref('');
+    const shippingAddress = ref('');
+    const city = ref('');
+    const postalCode = ref('');
+    const cardNumber = ref('');
+    const expiryDate = ref('');
+    const cvc = ref('');
+
+    const totalItems = computed(() => store.state.cart.reduce((sum, item) => sum + item.quantity, 0));
+    const cartTotal = computed(() => store.getters.cartTotal);
+
+    const submitOrder = () => {
+      alert('Your order has been placed!');
+    };
+
+    return {
+      firstName,
+      lastName,
+      email,
+      shippingAddress,
+      city,
+      postalCode,
+      cardNumber,
+      expiryDate,
+      cvc,
+      totalItems,
+      cartTotal,
+      submitOrder,
+    };
+  },
 };
 </script>
 
 <style scoped>
 .checkout-page {
-  padding: 40px;
-  max-width: 800px;
-  margin: 20px auto;
   background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 30px;
 }
 
-h1 {
-  font-size: 36px;
-  color: #333;
-  margin-bottom: 30px;
-  text-align: center;
+h1, h2 {
+  color: #1e88e5;
 }
 
-h2 {
-  font-size: 28px;
-  color: #333;
-  margin-bottom: 20px;
+label {
+  display: block;
+  margin-bottom: 5px;
 }
 
-.v-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+input {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
 }
 
-.v-text-field {
-  background-color: #f9f9f9;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.my-4 {
-  margin: 20px 0;
-}
-
-.text-right {
-  text-align: right;
-}
-
-.v-btn {
-  padding: 15px 30px;
-  font-size: 18px;
-  font-weight: bold;
-  background-color: #6200ea;
+button {
+  background-color: #1e88e5;
   color: white;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
 }
 
-.v-btn:hover {
-  background-color: #3700b3;
-}
-
-p {
-  font-size: 18px;
-  color: #666;
-}
-
-p.total-items,
-p.total-price {
-  font-weight: bold;
-  color: #333;
+button:hover {
+  background-color: #1565c0;
 }
 </style>

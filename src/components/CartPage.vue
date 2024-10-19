@@ -54,6 +54,7 @@ export default {
 </script>
 
 <style scoped>
+
 .cart-page {
   padding: 40px;
   background-color: #f5f5f5;

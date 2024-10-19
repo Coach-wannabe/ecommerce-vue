@@ -3,9 +3,9 @@
     <!-- Navigation -->
     <v-app-bar app color="primary" dark>
       <v-spacer></v-spacer>
-      <v-btn text class="nav-btn" @click="$router.push('/')">Home</v-btn>
-      <v-btn text class="nav-btn" @click="$router.push('/products')">Products</v-btn>
-      <v-btn text class="nav-btn" @click="$router.push('/cart')">Cart</v-btn>
+      <v-btn  class="nav-btn" @click="$router.push('/')">Home</v-btn>
+      <v-btn  class="nav-btn" @click="$router.push('/products')">Products</v-btn>
+      <v-btn  class="nav-btn" @click="$router.push('/cart')">Cart</v-btn>
 
       <v-btn class="nav-btn" v-if="!isAuthenticated" color="primary" @click="$router.push('/login')">Login</v-btn>
       <v-btn class="nav-btn" v-if="isAuthenticated" color="secondary" @click="logout">Logout</v-btn>
@@ -118,7 +118,6 @@ v-footer {
     font-size: 12px; /* Меньший текст для футера */
   }
 }
-<style>
 .nav-btn {
   margin-left: 15px;
   cursor: pointer;
@@ -129,7 +128,7 @@ v-footer {
 }
 
 v-footer {
-  position: absolute;
+  position: relative;
   width: 100%;
   bottom: 0;
 }
