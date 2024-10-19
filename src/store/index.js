@@ -1,28 +1,27 @@
 import { createStore } from 'vuex';
-
 const store = createStore({
   state: {
     products: [
       {
         id: 1,
-        name: 'Product A',
-        price: 100,
+        name: 'Laptop',
+        price: 359.999,
         description: 'A great product',
-        image: 'logo.png'
+        image: 'laptop.png'
       },
       {
         id: 2,
-        name: 'Product B',
-        price: 150,
+        name: 'Phone',
+        price: 275.999,
         description: 'Another great product',
-        image: 'logo.png'
+        image: 'phone.jpg'
       },
       {
         id: 3,
-        name: 'Product C',
-        price: 200,
+        name: 'Fridge',
+        price: 201.999,
         description: 'The best product',
-        image: 'logo.png'
+        image: 'fridge.jpg'
       }
     ],
     cart: [],
@@ -33,6 +32,9 @@ const store = createStore({
   mutations: {
     setUser(state, user) {
       state.user = user;
+    },
+    setProducts(state, products) {
+        state.products = products;
     },
 
     addRegisteredUser(state, user) {
@@ -46,6 +48,9 @@ const store = createStore({
       } else {
         state.cart.push({ ...product, quantity: 1 });
       }
+    },
+    removeFromCart(state, productId) {
+        state.cart = state.cart.filter(item => item.id !== productId);
     },
     
     logout(state) {
@@ -78,7 +83,11 @@ const store = createStore({
       localStorage.setItem('user', JSON.stringify({ username: credentials.username }));
       return { success: true };
     },
-
+    fetchProducts({ commit }) {
+        // Пример API запроса для продуктов
+        const products = [{ id: 1, name: 'Laptop' }, { id: 2, name: 'Phone' }];
+        commit('setProducts', products);
+    },
     logout({ commit }) {
       commit('logout');
     }
@@ -87,6 +96,9 @@ const store = createStore({
   getters: {
     isAuthenticated(state) {
       return !!state.user; 
+    },
+    cartItems(state) {
+        return state.cart;
     }
   }
 });
