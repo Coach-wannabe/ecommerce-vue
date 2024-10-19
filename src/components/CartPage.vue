@@ -1,13 +1,17 @@
 <template>
   <v-container class="cart-page">
     <h1 class="page-title">Your Shopping Cart</h1>
+    
+    <!-- Добавление слота для дополнительного контента -->
+    <slot name="additional-content"></slot> 
+
     <v-row>
       <v-col cols="12" v-for="item in cart" :key="item.id">
         <v-card class="cart-item">
           <v-img :src="getImage(item.image)" height="100px" class="cart-item-image"></v-img>
           <v-card-text>
             <h3 class="product-name">{{ item.name }}</h3>
-            <p class="product-price">{{ item.price }} USD ({{ item.quantity }})</p>
+            <p class="product-price">{{ item.price }} Tg ({{ item.quantity }})</p>
             <v-btn text color="red" @click="removeFromCart(item.id)">Remove</v-btn>
           </v-card-text>
         </v-card>
@@ -17,7 +21,7 @@
     <v-row>
       <v-col cols="12">
         <div class="cart-summary">
-          <p class="summary-title">Total Price: {{ cartTotal }} USD</p>
+          <p class="summary-title">Total Price: {{ cartTotal }} Tg</p>
           <v-btn color="primary" @click="$router.push('/checkout')">Proceed to Checkout</v-btn>
         </div>
       </v-col>
@@ -27,8 +31,13 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex';
+import { useCart } from '../composables/useCart';
 
 export default {
+  setup() {
+    const { cartItems } = useCart();
+    return { cartItems };
+  },
   computed: {
     ...mapState(['cart']),
     ...mapGetters(['cartTotal'])
