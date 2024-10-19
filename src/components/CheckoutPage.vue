@@ -78,24 +78,69 @@ export default {
 
 <style scoped>
 .checkout-page {
+  padding: 40px;
+  max-width: 800px;
+  margin: 20px auto;
   background-color: white;
-  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-h1, h2 {
-  color: #1e88e5;
+h1 {
+  font-size: 36px;
+  color: #333;
+  margin-bottom: 30px;
+  text-align: center;
 }
 
-.v-text-field {
+h2 {
+  font-size: 28px;
+  color: #333;
   margin-bottom: 20px;
 }
 
+.v-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.v-text-field {
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.my-4 {
+  margin: 20px 0;
+}
+
+.text-right {
+  text-align: right;
+}
+
 .v-btn {
-  background-color: #1e88e5;
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #6200ea;
   color: white;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
 .v-btn:hover {
-  background-color: #1565c0;
+  background-color: #3700b3;
+}
+
+p {
+  font-size: 18px;
+  color: #666;
+}
+
+p.total-items,
+p.total-price {
+  font-weight: bold;
+  color: #333;
 }
 </style>
