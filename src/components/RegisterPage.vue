@@ -1,60 +1,55 @@
 <template>
-<div class="register-container">
-  <h1>Register</h1>
-  <form @submit.prevent="registerUser" class="register-form">
-    <label for="username">Username</label>
-    <input
-      v-model="username"
-      id="username"
-      type="text"
-      placeholder="Enter your username"
-      required
-    />
+  <div class="register-container">
+    <h1>Register</h1>
+    <form @submit.prevent="registerUser" class="register-form">
+      <label for="firstName">First Name</label>
+      <input v-model="firstName" id="firstName" type="text" placeholder="First Name" required />
 
-    <label for="password">Password</label>
-    <input
-      v-model="password"
-      id="password"
-      type="password"
-      placeholder="Enter your password"
-      required
-    />
+      <label for="lastName">Last Name</label>
+      <input v-model="lastName" id="lastName" type="text" placeholder="Last Name" required />
 
-    <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
+      <label for="email">Email</label>
+      <input v-model="email" id="email" type="email" placeholder="Email" required />
 
-    <button type="submit">Register</button>
+      <label for="password">Password</label>
+      <input v-model="password" id="password" type="password" placeholder="Password" required />
 
-    <p>Already have an account? <router-link to="/login">Login here</router-link></p>
-  </form>
-</div>
+      <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
+
+      <button type="submit">Register</button>
+
+      <p>Already have an account? <router-link to="/login">Login here</router-link></p>
+    </form>
+  </div>
 </template>
 
 <script>
 export default {
-data() {
-  return {
-    username: '',
-    password: '',
-    errorMessage: ''
-  };
-},
-
-methods: {
-  registerUser() {
-    const credentials = {
-      username: this.username,
-      password: this.password
+  data() {
+    return {
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      errorMessage: ''
     };
-    
-    const result = this.$store.dispatch('register', credentials);
-    if (result.success) {
-      const redirect = this.$route.query.redirect || '/products'; 
-      this.$router.push(redirect);
-    } else {
-      this.errorMessage = result.message; 
+  },
+  methods: {
+    async registerUser() {
+      const result = await this.$store.dispatch('register', {
+        firstName: this.firstName,
+        lastName: this.lastName,
+        email: this.email,
+        password: this.password
+      });
+
+      if (result.success) {
+        this.$router.push('/products'); // Redirect on success
+      } else {
+        this.errorMessage = result.message; // Show error if email already exists
+      }
     }
   }
-}
 };
 </script>
 

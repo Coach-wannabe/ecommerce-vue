@@ -25,14 +25,20 @@ const store = createStore({
       }
     ],
     cart: [],
-    user: null, 
-    registeredUsers: [] 
+    registeredUsers: [], // Store registered users
+    user: JSON.parse(localStorage.getItem('user')) || null, // Store current logged-in user
   },
 
   mutations: {
     setUser(state, user) {
       state.user = user;
+      localStorage.setItem('user', JSON.stringify(user)); // Store user in localStorage
     },
+
+    addUser(state, user) {
+      state.registeredUsers.push(user); // Add new user to registered users array
+    },
+
     setProducts(state, products) {
         state.products = products;
     },
@@ -55,34 +61,45 @@ const store = createStore({
     
     logout(state) {
       state.user = null;
-      localStorage.removeItem('user'); 
+      localStorage.removeItem('user'); // Remove user from localStorage on logout
     }
   },
 
   actions: {
-    login({ commit, state }, credentials) {
-      const user = state.registeredUsers.find(
-        user => user.username === credentials.username && user.password === credentials.password
-      );
+    login({ commit, state }, { email, password }) {
+      // Find the user by email and password
+      const user = state.registeredUsers.find(user => user.email === email && user.password === password);
       if (user) {
-        commit('setUser', { username: user.username });
-        localStorage.setItem('user', JSON.stringify({ username: user.username }));
+        commit('setUser', { id: user.id, email: user.email, firstName: user.firstName }); // Store user
         return true;
       }
-      return false; 
+      return false; // Login failed
     },
 
-    register({ commit, state }, credentials) {
-      const existingUser = state.registeredUsers.find(user => user.username === credentials.username);
+    // Registration logic
+    register({ commit, state }, { firstName, lastName, email, password }) {
+      // Check if email already exists
+      const existingUser = state.registeredUsers.find(user => user.email === email);
       if (existingUser) {
-        return { success: false, message: 'Username already exists' }; 
+        return { success: false, message: 'Email already exists' };
       }
-      
-      commit('addRegisteredUser', credentials);
-      commit('setUser', { username: credentials.username }); 
-      localStorage.setItem('user', JSON.stringify({ username: credentials.username }));
+
+      // Create new user object
+      const newUser = {
+        id: state.registeredUsers.length + 1, // Unique ID for the user
+        firstName,
+        lastName,
+        email,
+        password
+      };
+
+      // Add user to state and log them in
+      commit('addUser', newUser);
+      commit('setUser', { id: newUser.id, email: newUser.email, firstName: newUser.firstName });
+
       return { success: true };
     },
+    
     fetchProducts({ commit }) {
         // Пример API запроса для продуктов
         const products = [{ id: 1, name: 'Laptop' }, { id: 2, name: 'Phone' }];
@@ -101,10 +118,10 @@ const store = createStore({
   
   getters: {
     isAuthenticated(state) {
-      return !!state.user; 
+      return !!state.user; // Check if a user is logged in
     },
-    cartItems(state) {
-        return state.cart;
+    currentUser(state) {
+      return state.user; // Return current logged-in user
     }
   }
 });

@@ -2,12 +2,12 @@
   <div class="login-container">
     <h1>Login</h1>
     <form @submit.prevent="loginUser" class="login-form">
-      <label for="username">Username</label>
+      <label for="email">Email</label>
       <input
-        v-model="username"
-        id="username"
-        type="text"
-        placeholder="Enter your username"
+        v-model="email"
+        id="email"
+        type="email"
+        placeholder="Enter your email"
         required
       />
 
@@ -33,24 +33,22 @@
 export default {
   data() {
     return {
-      username: '',
+      email: '',
       password: '',
       errorMessage: ''
     };
   },
   methods: {
-    loginUser() {
-      const credentials = {
-        username: this.username,
+    async loginUser() {
+      const success = await this.$store.dispatch('login', {
+        email: this.email,
         password: this.password
-      };
-      
-      const success = this.$store.dispatch('login', credentials);
+      });
+
       if (success) {
-        const redirect = this.$route.query.redirect || '/products'; 
-        this.$router.push(redirect);
+        this.$router.push('/products'); // Redirect on success
       } else {
-        this.errorMessage = 'Invalid username or password'; 
+        this.errorMessage = 'Invalid email or password'; // Display error
       }
     }
   }
