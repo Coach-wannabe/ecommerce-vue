@@ -7,7 +7,7 @@
       label="Filter by category"
       @change="filterProducts"
     ></v-select>
-      <div v-for="product in products" :key="product.id" class="product-card">
+      <div v-for="product in paginatedProducts" :key="product.id" class="product-card">
         <router-link :to="{ name: 'ProductDetail', params: { id: product.id } }">{{ product.name }}</router-link>
         <img :src="getImage(product.image)" class="product-image" />
         <h2>{{ product.name }}</h2>
