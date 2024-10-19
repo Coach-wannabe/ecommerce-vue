@@ -7,10 +7,7 @@
       <v-btn text class="nav-btn" @click="$router.push('/products')">Products</v-btn>
       <v-btn text class="nav-btn" @click="$router.push('/cart')">Cart</v-btn>
 
-      <!-- Conditionally show Login button if the user is not logged in -->
       <v-btn class="nav-btn" v-if="!isAuthenticated" color="primary" @click="$router.push('/login')">Login</v-btn>
-
-      <!-- Conditionally show Logout button if the user is logged in -->
       <v-btn class="nav-btn" v-if="isAuthenticated" color="secondary" @click="logout">Logout</v-btn>
     </v-app-bar>
 
@@ -25,7 +22,6 @@
     </v-footer>
   </v-app>
 </template>
-
 
 <script>
 import { mapGetters } from 'vuex';
@@ -88,28 +84,26 @@ v-app-bar-title {
   background-color: rgba(255, 255, 255, 0.1); /* Эффект наведения */
 }
 
-/* Основной контент, чтобы не прилипать к футеру */
 v-main {
-  padding: 20px;
-  min-height: calc(100vh - 64px - 56px); /* Расчет высоты, чтобы футер был внизу */
+  flex-grow: 1; /* Чтобы основной контент занимал оставшееся пространство */
 }
 
-/* Стили для футера */
+v-app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Минимальная высота приложения - вся высота экрана */
+}
+
 v-footer {
-  color: #333; /* Белый текст */
-  text-align: center; /* Центрирование текста */
-  padding: 20px 0; /* Внутренние отступы для футера */
-  position: fixed; /* Закрепление футера внизу */
-  width: 100%; /* Растяжение футера на всю ширину */
-  bottom: 0; /* Размещение внизу страницы */
+  position: relative;
+  width: 100%;
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  bottom: 0;
+  left: 0;
 }
-
-/* Стили для текста внутри футера */
-v-footer v-col {
-  font-size: 14px; /* Размер текста */
-  color: #333;
-}
-
 .text-center {
   font-size: 14px;
 }
@@ -123,21 +117,5 @@ v-footer v-col {
   v-footer {
     font-size: 12px; /* Меньший текст для футера */
   }
-}
-</style>
-
-.nav-btn {
-  margin-left: 15px;
-  cursor: pointer;
-}
-
-.nav-btn:hover {
-  text-decoration: underline; 
-}
-
-v-footer {
-  position: absolute;
-  width: 100%;
-  bottom: 0;
 }
 </style>
