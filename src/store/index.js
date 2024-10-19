@@ -112,6 +112,12 @@ const store = createStore({
   },
 
   mutations: {
+    updateRating(state, { productId, rating }) {
+      const product = state.products.find(p => p.id === productId);
+      if (product) {
+        product.rating = rating;
+      }
+    },
     setUser(state, user) {
       state.user = user;
       localStorage.setItem('user', JSON.stringify(user)); 
@@ -154,6 +160,9 @@ const store = createStore({
   },
 
   actions: {
+    rateProduct({ commit }, { productId, rating }) {
+      commit('updateRating', { productId, rating }); // Вызываем мутацию для обновления рейтинга
+    },
     login({ commit, state }, { email, password }) {
       const user = state.registeredUsers.find(user => user.email === email && user.password === password);
       if (user) {
@@ -168,6 +177,8 @@ const store = createStore({
       if (existingUser) {
         return { success: false, message: 'Email already exists' };
       }
+
+      
 
       const newUser = {
         id: state.registeredUsers.length + 1, 

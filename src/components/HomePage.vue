@@ -1,14 +1,13 @@
 <template>
   <div class="home-page">
     <h1>Welcome to Our E-Commerce Site</h1>
-    <p>Browse our latest products below</p>
 
     <div class="discount-message">
       <h2>BIG DISCOUNTS!</h2>
       <p>Don't miss out on our amazing offers!</p>
     </div>
 
-    <h2>Popular Products</h2>
+    <h2>Rate our products</h2>
     <div class="product-grid">
       <div v-for="product in popularProducts" :key="product.id" class="product-card">
         <img :src="getImage(product.image)" alt="Product Image" class="product-image" />
@@ -78,7 +77,7 @@ export default {
 }
 
 .side-image {
-  width: 150px; /* Задайте нужную ширину изображений */
+  width: 150px;
   height: auto;
 }
 
@@ -111,7 +110,6 @@ p {
   margin-bottom: 40px;
 }
 
-/* Популярные товары */
 .product-grid {
   display: flex;
   flex-wrap: wrap;
@@ -143,7 +141,6 @@ p {
   border-radius: 8px;
 }
 
-/* Стили для звездочек */
 .rating {
   margin-bottom: 10px;
 }
