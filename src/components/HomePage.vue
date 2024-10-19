@@ -3,6 +3,12 @@
     <h1>Welcome to Our E-Commerce Site</h1>
     <p>Browse our latest products below</p>
 
+    <div class="discount-poster">
+      <h2>Big Discounts!</h2>
+      <p>Get up to 50% off on selected items!</p>
+      <router-link to="/products" class="shop-now-btn">Shop Now</router-link>
+    </div>
+
     <div class="product-grid">
       <div v-for="product in products" :key="product.id" class="product-card">
         <img :src="getImage(product.image)" alt="Product Image" class="product-image" />
@@ -56,6 +62,38 @@ p {
   font-size: 18px;
   color: #555;
   margin-bottom: 40px;
+}
+
+.discount-poster {
+  background-size: cover;
+  background-position: center;
+  padding: 50px;
+  color: white;
+  margin-bottom: 40px;
+  border-radius: 10px;
+}
+
+.discount-poster h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.discount-poster p {
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+
+.shop-now-btn {
+  background-color: #ff4081;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.shop-now-btn:hover {
+  background-color: #e91e63;
 }
 
 .product-grid {

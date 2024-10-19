@@ -7,6 +7,7 @@
     label="Filter by category"
     @change="filterProducts"
   ></v-select>
+  
   <div class="product-grid">
   <div v-for="product in paginatedProducts" :key="product.id" class="product-card">
     <router-link :to="{ name: 'ProductDetail', params: { id: product.id } }">More</router-link>
@@ -58,8 +59,6 @@ export default {
     const end = start + this.itemsPerPage;
     return this.filteredProducts.slice(start, end);
   },
-
-
 },
 
 methods: {

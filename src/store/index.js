@@ -86,6 +86,13 @@ const store = createStore({
         description: 'Meta uber extra multi hyper ultra mega super best product',
         image: 'camera.jpg'
       },
+      {
+        id: 12,
+        name: 'Camera',
+        price: 119.00,
+        description: 'Meta uber extra multi hyper ultra mega super best product',
+        image: 'camera.jpg'
+      },
     ],
     cart: [],
     registeredUsers: [], 
