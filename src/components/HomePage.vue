@@ -40,31 +40,44 @@ export default {
 
 <style scoped>
 .home-page {
-  padding: 20px;
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 h1 {
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-p {
-  text-align: center;
+  font-size: 48px;
+  color: #333;
   margin-bottom: 20px;
 }
 
+p {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 40px;
+}
+
 .product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Центрирование карточек */
+  gap: 20px; /* Отступы между карточками */
 }
 
 .product-card {
-  background-color: #f9f9f9;
-  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
   border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
   text-align: center;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 250px; /* Фиксированная ширина карточек */
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
 }
 
 .product-image {
@@ -72,22 +85,37 @@ p {
   height: auto;
   max-height: 200px;
   object-fit: cover;
+  margin-bottom: 15px;
+  border-radius: 8px;
+}
+
+h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.product-card p {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 20px;
 }
 
 button {
-  margin-top: 10px;
-  padding: 10px;
-  background-color: #4caf50;
+  background-color: #6200ea;
   color: white;
   border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
   border-radius: 5px;
   cursor: pointer;
-  transition: all 500ms ease;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background: rgba(0,0,0,0);
-  color: #308c34;
-  box-shadow: inset 0 0 0 3px #308c34;
+  background-color: #3700b3;
 }
+
 </style>
+
