@@ -1,6 +1,7 @@
 <template>
     <div class="product-list-page">
       <h1>Our Products</h1>
+<<<<<<< HEAD
       <v-select
       v-model="selectedCategory"
       :items="categories"
@@ -9,6 +10,10 @@
     ></v-select>
       <div v-for="product in paginatedProducts" :key="product.id" class="product-card">
         <router-link :to="{ name: 'ProductDetail', params: { id: product.id } }">{{ product.name }}</router-link>
+=======
+      <div v-for="product in products" :key="product.id" class="product-card">
+   <router-link :to="{ name: 'ProductDetail', params: { id: product.id } }">More</router-link>
+>>>>>>> 0a1ce87e6cedd36a8cfe9559f3791c62bf5ecc46
         <img :src="getImage(product.image)" class="product-image" />
         <h2>{{ product.name }}</h2>
         <p>{{ product.price }} Tg</p>
