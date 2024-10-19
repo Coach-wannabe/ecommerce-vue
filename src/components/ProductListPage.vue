@@ -1,37 +1,29 @@
 <template>
   <div class="product-list-page">
+    <SideBarMenu /> <!-- Include the SideBarMenu component here -->
     <h1>Our Products</h1>
-<<<<<<< HEAD
     <v-select
-    v-model="selectedCategory"
-    :items="categories"
-    label="Filter by category"
-    @change="filterProducts"
-  ></v-select>
+      v-model="selectedCategory"
+      :items="categories"
+      label="Filter by category"
+      @change="filterProducts"
+    ></v-select>
   
-=======
+    <div class="product-grid">
+      <div v-for="product in paginatedProducts" :key="product.id" class="product-card">
+        <router-link :to="{ name: 'ProductDetail', params: { id: product.id } }">More</router-link>
+        <img :src="getImage(product.image)" class="product-image" alt="Product Image" />
+        <h2>{{ product.name }}</h2>
+        <p>{{ product.price }} Tg</p>
+        <button @click="addToCart(product)">Add to Cart</button>
+      </div>
+    </div>
 
-
-    <SideBarMenu :is-visible="true"
-                 :available-category="categories"
-                  @filter-category="filterByCategory"></SideBarMenu>
-
->>>>>>> 4c74393458a1ad7e2f86c247188cfcf9ad39ae41
-  <div class="product-grid">
-  <div v-for="product in paginatedProducts" :key="product.id" class="product-card">
-    <router-link :to="{ name: 'ProductDetail', params: { id: product.id } }">More</router-link>
-    <img :src="getImage(product.image)" class="product-image" alt="Product Image" />
-    <h2>{{ product.name }}</h2>
-    <p>{{ product.price }} Tg</p>
-    <button @click="addToCart(product)">Add to Cart</button>
-  </div>
-</div>
     <div class="pagination-buttons">
       <button @click="prevPage" :disabled="currentPage === 1">Предыдущее</button>
       <button @click="nextPage" :disabled="currentPage === totalPages">Далее</button>
     </div>
-
-</div>
+  </div>
 </template>
 
 <script>
@@ -39,7 +31,7 @@ import { mapState } from 'vuex';
 import SideBarMenu from "@/components/SideBarMenu.vue";
 
 export default {
-  components: {SideBarMenu},
+  components: { SideBarMenu },
   data() {
     return {
       selectedCategory: 'All',
@@ -52,51 +44,50 @@ export default {
 
   computed: {
     ...mapState({
-    products: state => state.products, // пример использования mapState
-  }),
-  
-  filteredProducts() {
-    if (this.selectedCategory === 'All') {
-      return this.products;
-    }
-    return this.products.filter(product => product.category === this.selectedCategory);
-  },
-  
-  totalPages() {
-    return Math.ceil(this.filteredProducts.length / this.itemsPerPage);
-  },
-  
-  paginatedProducts() {
-    const start = (this.currentPage - 1) * this.itemsPerPage;
-    const end = start + this.itemsPerPage;
-    return this.filteredProducts.slice(start, end);
-  },
-},
-
-methods: {
-  getImage(imageName) {
-    return require(`@/assets/images/${imageName}`);
+      products: state => state.products,
+    }),
+    
+    filteredProducts() {
+      if (this.selectedCategory === 'All') {
+        return this.products;
+      }
+      return this.products.filter(product => product.category === this.selectedCategory);
+    },
+    
+    totalPages() {
+      return Math.ceil(this.filteredProducts.length / this.itemsPerPage);
+    },
+    
+    paginatedProducts() {
+      const start = (this.currentPage - 1) * this.itemsPerPage;
+      const end = start + this.itemsPerPage;
+      return this.filteredProducts.slice(start, end);
+    },
   },
 
-  addToCart(product) {
-    this.$store.dispatch('addToCart', product);
-  },
-  prevPage() {
-    if (this.currentPage > 1) {
-      this.currentPage--;
+  methods: {
+    getImage(imageName) {
+      return require(`@/assets/images/${imageName}`);
+    },
+
+    addToCart(product) {
+      this.$store.dispatch('addToCart', product);
+    },
+    prevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+      }
+    },
+    nextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++;
+      }
+    },
+    filterByCategory(category) {
+      this.selectedCategory = category;
+      this.currentPage = 1;
     }
-  },
-  nextPage() {
-    if (this.currentPage < this.totalPages) {
-      this.currentPage++;
-    }
-  },
-  filterByCategory(category) {
-    this.selectedCategory = category;
-    this.currentPage = 1;
   }
-
-}
 };
 </script>
 
