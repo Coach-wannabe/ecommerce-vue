@@ -56,9 +56,15 @@ const store = createStore({
       }
     },
     removeFromCart(state, productId) {
-        state.cart = state.cart.filter(item => item.id !== productId);
+      const item = state.cart.find(item => item.id === productId);
+      if (item) {
+        if (item.quantity > 1) {
+          item.quantity -= 1;
+        } else {
+          state.cart = state.cart.filter(item => item.id !== productId);
+        }
+      }
     },
-    
     logout(state) {
       state.user = null;
       localStorage.removeItem('user'); 
@@ -116,6 +122,11 @@ const store = createStore({
     },
     currentUser(state) {
       return state.user; 
+    },
+    cartTotal(state){
+      return state.cart.reduce((total, item) =>{
+        return total + item.price * item.quantity;
+      }, 0);
     }
   }
 });

@@ -82,9 +82,12 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: all 500ms ease;
 }
 
 button:hover {
-  background-color: #45a049;
+  background: rgba(0,0,0,0);
+  color: #308c34;
+  box-shadow: inset 0 0 0 3px #308c34;
 }
 </style>
