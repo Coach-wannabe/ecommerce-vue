@@ -19,10 +19,73 @@ const store = createStore({
       {
         id: 3,
         name: 'Fridge',
-        price: 201.999,
+        price: 296.20,
         description: 'The best product',
         image: 'fridge.jpg'
-      }
+      },
+      {
+        id: 4,
+        name: 'Headphones',
+        price: 48.90,
+        description: 'Super best product',
+        image: 'naushniki-sony.png'
+      },
+      {
+        id: 5,
+        name: 'Air conditioner',
+        price: 1.999,
+        description: 'Mega super best product',
+        image: 'cond.jpg'
+      },
+      {
+        id: 6,
+        name: 'Tablet',
+        price: 1.999,
+        description: 'Ultra mega super best product',
+        image: 'ipad.jpg'
+      },
+      {
+        id: 7,
+        name: 'Iron',
+        price: 200.999,
+        description: 'Hyper ultra mega super best product',
+        image: 'utug.png'
+      },
+      {
+        id: 8,
+        name: 'Washing machine',
+        price: 1000.999,
+        description: 'Mega hyper ultra mega super best product',
+        image: 'stmach.png'
+      },
+      {
+        id: 9,
+        name: 'TV',
+        price: 2960.00,
+        description: 'Extra multi hyper ultra mega super best product',
+        image: 'tv.png'
+      },
+      {
+        id: 10,
+        name: 'Vacuum cleaner',
+        price: 62.00,
+        description: 'Uber extra multi hyper ultra mega super best product',
+        image: 'pul.jpg'
+      },
+      {
+        id: 11,
+        name: 'Heater',
+        price: 24.00,
+        description: 'Meta uber extra multi hyper ultra mega super best product',
+        image: '81948066.jpg'
+      },
+      {
+        id: 12,
+        name: 'Camera',
+        price: 119.00,
+        description: 'Meta uber extra multi hyper ultra mega super best product',
+        image: 'camera.jpg'
+      },
     ],
     cart: [],
     registeredUsers: [], 

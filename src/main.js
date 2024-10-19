@@ -4,6 +4,7 @@ import vuetify from './plugins/vuetify';
 import router from './router';
 import store from './store';
 import './assets/styles.css';
+import '@mdi/font/css/materialdesignicons.css';
 
 createApp(App)
   .use(router)

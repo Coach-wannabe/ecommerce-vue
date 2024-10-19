@@ -1,7 +1,6 @@
 <template>
     <div class="product-list-page">
       <h1>Our Products</h1>
-<<<<<<< HEAD
       <v-select
       v-model="selectedCategory"
       :items="categories"
@@ -10,10 +9,6 @@
     ></v-select>
       <div v-for="product in paginatedProducts" :key="product.id" class="product-card">
         <router-link :to="{ name: 'ProductDetail', params: { id: product.id } }">{{ product.name }}</router-link>
-=======
-      <div v-for="product in products" :key="product.id" class="product-card">
-   <router-link :to="{ name: 'ProductDetail', params: { id: product.id } }">More</router-link>
->>>>>>> 0a1ce87e6cedd36a8cfe9559f3791c62bf5ecc46
         <img :src="getImage(product.image)" class="product-image" />
         <h2>{{ product.name }}</h2>
         <p>{{ product.price }} Tg</p>
@@ -22,6 +17,9 @@
       <v-pagination
       v-model="currentPage"
       :length="totalPages"
+      :total-visible="5"
+      prev-icon="mdi-chevron-left"
+      next-icon="mdi-chevron-right"
       circle
     ></v-pagination>
   </div>
@@ -76,6 +74,21 @@
 </script>
 
 <style scoped>
+.v-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.v-pagination .v-pagination__navigation {
+  background-color: #6200ea;
+  color: white;
+}
+
+.v-pagination .v-pagination__item--is-active {
+  background-color: #3700b3;
+};
+
 .product-list-page {
   display: flex;
   flex-direction: column;

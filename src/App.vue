@@ -118,7 +118,6 @@ v-footer {
     font-size: 12px; /* Меньший текст для футера */
   }
 }
-<<<<<<< HEAD
 <style>
 .nav-btn {
   margin-left: 15px;
@@ -134,6 +133,4 @@ v-footer {
   width: 100%;
   bottom: 0;
 }
-=======
->>>>>>> 0a1ce87e6cedd36a8cfe9559f3791c62bf5ecc46
 </style>
