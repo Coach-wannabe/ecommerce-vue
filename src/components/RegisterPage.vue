@@ -14,9 +14,18 @@
       <label for="password">Password</label>
       <input v-model="password" id="password" type="password" placeholder="Password" required />
 
+      <label for="confirmPassword">Confirm Password</label>
+      <input
+        v-model="confirmPassword"
+        id="confirmPassword"
+        type="password"
+        placeholder="Confirm Password"
+        required
+      />
+
       <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
 
-      <button type="submit">Register</button>
+      <button type="submit" :disabled="!formValid">Register</button>
 
       <p>Already have an account? <router-link to="/login">Login here</router-link></p>
     </form>
@@ -31,25 +40,37 @@ export default {
       lastName: '',
       email: '',
       password: '',
-      errorMessage: ''
+      confirmPassword: '',
+      errorMessage: '',
     };
+  },
+  computed: {
+    // This will be true only if both passwords match
+    formValid() {
+      return this.password === this.confirmPassword && this.password.length > 0;
+    },
   },
   methods: {
     async registerUser() {
+      if (!this.formValid) {
+        this.errorMessage = 'Passwords do not match!';
+        return;
+      }
+
       const result = await this.$store.dispatch('register', {
         firstName: this.firstName,
         lastName: this.lastName,
         email: this.email,
-        password: this.password
+        password: this.password,
       });
 
       if (result.success) {
-        this.$router.push('/products'); 
+        this.$router.push('/products'); // Redirect on success
       } else {
-        this.errorMessage = result.message; 
+        this.errorMessage = result.message; // Show error if email already exists
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -97,6 +118,11 @@ button:hover {
   color: red;
   font-size: 14px;
   margin-bottom: 10px;
+}
+
+button[disabled] {
+  background-color: #ddd;
+  cursor: not-allowed;
 }
 </style>
   
