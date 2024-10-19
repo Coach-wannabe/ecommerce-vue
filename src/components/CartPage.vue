@@ -1,37 +1,31 @@
 <template>
-  <v-container class="cart-page">
+  <div class="cart-page">
     <h1 class="page-title">Your Shopping Cart</h1>
     
     <!-- Добавление слота для дополнительного контента -->
     <slot name="additional-content"></slot> 
 
-    <v-row>
-      <v-col cols="12" v-for="item in cart" :key="item.id">
-        <v-card class="cart-item">
-          <img :src="getImage(item.image)" height="100px" class="cart-item-image" alt="Product image">
-          <v-card-text>
-            <h3 class="product-name">{{ item.name }}</h3>
-            <p class="product-price">{{ item.price }} Tg ({{ item.quantity }})</p>
-            <button @click="removeFromCart(item.id)">Remove</button>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
-
-    <v-row>
-      <v-col cols="12">
-        <div class="cart-summary">
-          <p class="summary-title">Total Price: {{ cartTotal }} Tg</p>
-          <button class="checkout" @click="$router.push('/checkout')">Proceed to Checkout</button>>
+    <div class="cart-items">
+      <div v-for="item in cart" :key="item.id" class="cart-item">
+        <img :src="getImage(item.image)" class="cart-item-image" alt="Product image">
+        <div class="cart-item-details">
+          <h3 class="product-name">{{ item.name }}</h3>
+          <p class="product-price">{{ item.price }} Tg ({{ item.quantity }})</p>
+          <button @click="removeFromCart(item.id)" class="remove-btn">Remove</button>
         </div>
-      </v-col>
-    </v-row>
-  </v-container>
+      </div>
+    </div>
+
+    <div class="cart-summary">
+      <p class="summary-title">Total Price: {{ cartTotal }} Tg</p>
+      <button class="checkout-btn" @click="$router.push('/checkout')">Proceed to Checkout</button>
+    </div>
+  </div>
 </template>
 
 <script>
 import { useCart } from '@/composables/useCart';
-import {mapGetters, mapState} from "vuex";
+import { mapGetters, mapState } from "vuex";
 
 export default {
   setup() {
@@ -67,19 +61,30 @@ export default {
   text-align: center;
 }
 
+.cart-items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .cart-item {
   display: flex;
   align-items: center;
   background-color: #fff;
-  margin-bottom: 20px;
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .cart-item-image {
+  width: 100px;
   margin-right: 20px;
   border-radius: 8px;
+}
+
+.cart-item-details {
+  display: flex;
+  flex-direction: column;
 }
 
 .product-name {
@@ -94,7 +99,7 @@ export default {
   margin-top: 10px;
 }
 
-button {
+.remove-btn {
   background-color: #ff5722;
   color: white;
   padding: 10px 15px;
@@ -103,9 +108,10 @@ button {
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-top: 10px;
 }
 
-button:hover {
+.remove-btn:hover {
   background-color: #e64a19;
 }
 
@@ -117,6 +123,7 @@ button:hover {
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
 }
 
 .summary-title {
@@ -125,7 +132,7 @@ button:hover {
   color: #333;
 }
 
-.checkout {
+.checkout-btn {
   background-color: #6200ea;
   color: white;
   padding: 10px 20px;
@@ -136,7 +143,7 @@ button:hover {
   transition: background-color 0.3s ease;
 }
 
-.checkout:hover {
+.checkout-btn:hover {
   background-color: #3700b3;
 }
 </style>
