@@ -125,9 +125,10 @@ const store = createStore({
       return state.user; 
     },
     cartTotal(state){
-      return state.cart.reduce((total, item) =>{
-        return total + item.price * item.quantity;
+      const total = state.cart.reduce((sum, item) =>{
+        return sum + item.price * item.quantity;
       }, 0);
+      return total.toFixed(3);
     }
   }
 });
