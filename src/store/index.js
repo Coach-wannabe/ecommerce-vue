@@ -88,6 +88,9 @@ const store = createStore({
         const products = [{ id: 1, name: 'Laptop' }, { id: 2, name: 'Phone' }];
         commit('setProducts', products);
     },
+    addToCart({ commit }, product){
+      commit('addToCart', product);
+    },
     logout({ commit }) {
       commit('logout');
     }

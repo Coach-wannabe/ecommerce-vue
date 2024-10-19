@@ -30,8 +30,8 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex';
-import { useCart } from '../composables/useCart';
+import { useCart } from '@/composables/useCart';
+import {mapGetters, mapState} from "vuex";
 
 export default {
   setup() {
